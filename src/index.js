@@ -14,7 +14,8 @@ app.get('/weather', (req, res) => {
 	if (!city) {
 		res.status(400).json({ error: 'Invalid city name' });
 	} else {
-		fetch(`${ WEATHER_API_URL }?q=${ city }&appid=${ API_KEY }`)
+		const url = `${ WEATHER_API_URL }?q=${ city }&appid=${ API_KEY }`;
+		fetch(encodeURI(url))
 			.then(response => response.json())
 			.then(response => {
 				res.status(200).json(response);
